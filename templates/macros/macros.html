@@ -1,0 +1,21 @@
+{%  macro genereer_link(pad,tekst)%}
+    <a href="{{ pad }}">{{ tekst }}</a>
+{% endmacro %}
+
+
+{%  macro genereer_figure(img_naam,bijschrift)%}
+    <figure>
+        <img src="{{ url_for('static', filename=img_naam) }}">
+        <figcaption>{{ bijschrift }}</figcaption>
+    </figure>
+{% endmacro %}
+
+
+{%  macro genereer_input(type, id="", alt_tekst="", value="")%}
+    <input type="{{ type }}" id= "" alt="{{ alt_tekst }}" value="{{ value }}">
+{% endmacro %}
+
+
+{%  macro genereer_img(img_pad, alt_tekst="")%}
+    <img src="{{ img_pad }}" alt="{{ alt_tekst }}">
+{% endmacro %}

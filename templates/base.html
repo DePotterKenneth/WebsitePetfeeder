@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+
+
+<body>
+
+{%  import 'macros/macros.html' as macros %}
+
+
+<nav>
+    <ul>
+        <li>{{ macros.genereer_link('/', 'Homepagina') }}</li>
+        <li>{{ macros.genereer_link('/producten', 'Producten') }}</li>
+        <li>{{ macros.genereer_link('/contact', 'Contacteer ons') }}</li>
+        <li>{{ macros.genereer_link('/about', 'About') }}</li>
+    </ul>
+</nav>
+
+{% block body %}
+{% endblock %}
+</body>
+</html>
