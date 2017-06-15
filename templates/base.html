@@ -3,31 +3,44 @@
 <head>
     <meta charset="UTF-8">
 
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta name="description" content="{% block content_description %}{% endblock %}">
+    <meta name="author" content="kedepo">
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
 
-    <title>
-        {% block title %}
-        {% endblock %}
-    </title>
 </head>
 
 
 <body>
 
-{%  import 'macros/macros.html' as macros %}
+{% import 'macros/macros.html' as macros %}
 
+<header>
+    {#    <a href="index.html"><img src="{{ url_for('static', filename='img/logo.png') }}"></a>#}
 
-<nav>
-    <ul>
-        <li>{{ macros.genereer_link('/', 'Homepagina') }}</li>
-        <li>{{ macros.genereer_link('/producten', 'Producten') }}</li>
-        <li>{{ macros.genereer_link('/contact', 'Contacteer ons') }}</li>
-        <li>{{ macros.genereer_link('/about', 'About') }}</li>
-    </ul>
-</nav>
+    <nav>
+        <ul>
+            <li>{{ macros.genereer_link('/', 'Live') }}</li>
+            <li>{{ macros.genereer_link('/history', 'History') }}</li>
+            <li>{{ macros.genereer_link('/settings', 'Settings ') }}</li>
+        </ul>
+    </nav>
+</header>
+
 
 {% block body %}
 {% endblock %}
+
+<footer>
+    <ul>
+        <li><a href="about.html" title="About">About</a></li>
+        <li>Copyright</li>
+    </ul>
+</footer>
+
 </body>
 </html>

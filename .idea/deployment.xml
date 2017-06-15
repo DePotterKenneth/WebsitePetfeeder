@@ -5,7 +5,7 @@
       <paths name="ssh://petfeeder@169.254.10.111:22/usr/bin/python3">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/petfeeder/petfeeder_web" local="$PROJECT_DIR$" />
+            <mapping deploy="/petfeeder_web" local="$PROJECT_DIR$" web="169.254.10.111" />
           </mappings>
         </serverdata>
       </paths>
