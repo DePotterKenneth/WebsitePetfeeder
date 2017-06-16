@@ -1,21 +1,62 @@
 from flask import Flask
 from flask import render_template
+from flask import request
+from flask import abort
+from dbsecurity.dbconn import DbConnection
 import os
+instance_db = DbConnection("petfeeder_db")
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def live():
-    return render_template('index.html')
+    sql = ('SELECT millilitres_left, timestamp FROM petfeeder_db.tbldrinklog where date(timestamp) = current_date();')
+    result = instance_db.query(sql, dictionary=True)
+    drink_time_list = []
+    drink_value_list = []
+
+    for item in range(0, len(result)):
+        record = result[item]
+        drink_time_list.append(record['timestamp'])
+        drink_value_list.append(record['millilitres_left'])
+
+    print(drink_value_list)
+    print(drink_time_list)
+
+    return render_template('index.html', drink_time_list=drink_time_list, drink_value_list=drink_value_list)
 
 @app.route('/history')
 def history():
     return render_template('history.html')
 
-@app.route('/settings')
+@app.route('/settings', methods=['GET','POST'])
 def settings():
-    return render_template('settings.html')
+    instantie_db = DbConnection('petfeeder_db')
+
+    if request.method == 'POST':
+        try:
+            # sql = ('update tblsettings set led_alarm_enabeld = %(led_alarm_enabeld)s where settings_id = 1;')
+            #
+            # params = {
+            #     'led_alarm_enabeld': int(request.form['led_alarm_enabeld'])
+            # }
+            #
+            # instantie_db.execute(sql, params)
+
+            vae = request.form['led_alarm_enabeld']
+
+            print(vae)
+
+            return render_template('settings.html')
+        except:
+            abort(400)
+    else:
+        return render_template('settings.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.errorhandler(401)
 def throw_401(error):

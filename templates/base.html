@@ -27,20 +27,27 @@
             <li>{{ macros.genereer_link('/', 'Live') }}</li>
             <li>{{ macros.genereer_link('/history', 'History') }}</li>
             <li>{{ macros.genereer_link('/settings', 'Settings ') }}</li>
+            <li class="img_logout"><a href="index.html"><img src="{{ url_for('static', filename='img/logout_icon.png') }}"></a></li>
         </ul>
     </nav>
 </header>
 
+<div class="content">
+   {% block body %}
+   {% endblock %}
+</div>
 
-{% block body %}
-{% endblock %}
 
 <footer>
     <ul>
         <li><a href="about.html" title="About">About</a></li>
-        <li>Copyright</li>
+        <li><a href="about.html" title="Instructables">Instructables</a></li>
+        <li><a href="about.html" title="Portfolio">Portfolio</a></li>
+        <li class="float_right">Copyright kedepo</li>
     </ul>
 </footer>
+
+{% block scripts %}{% endblock %}
 
 </body>
 </html>

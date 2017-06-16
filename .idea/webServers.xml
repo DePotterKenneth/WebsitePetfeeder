@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="ssh://petfeeder@169.254.10.111:22/usr/bin/python3" name="ssh://petfeeder@169.254.10.111:22/usr/bin/python3" url="http://169.254.10.111">
+      <webServer id="ssh://petfeeder@169.254.10.111:22/usr/bin/python3" name="ssh://petfeeder@169.254.10.111:22/usr/bin/python3" url="">
         <fileTransfer host="169.254.10.111" port="22" rootFolder="/home/petfeeder" accessType="SFTP">
           <option name="port" value="22" />
         </fileTransfer>

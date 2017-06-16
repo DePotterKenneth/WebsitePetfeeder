@@ -5,7 +5,7 @@ html{
 body{
     width: 1000px;
     margin: auto;
-    height: auto;
+    height: inherit;
 }
 
 header{
@@ -42,7 +42,7 @@ nav ul li a{
 }
 
 nav ul li a:hover{
-    background-color: black;
+    background-color: #7CCC3D;
 }
 
 section{
@@ -63,11 +63,15 @@ h1{
 }
 
 footer{
-    background-color: black;
+    background-color: green;
+    position: fixed;
+    width: inherit;
+    bottom: 0;
 }
 
 
 footer nav ul{
+
     list-style-type: none;
 }
 
@@ -81,6 +85,48 @@ footer ul li{
 footer ul li a{
     color: white;
     text-decoration: none;
+}
+
+.small_chart{
+    width: 45%;
+    height: auto;
+    padding: 2%;
+    border: 1px solid black;
+}
+
+.content{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.float_left{
+    float: left;
+}
+
+.float_right{
+    float: right;
+}
+
+.img_logout{
+    width: 10px;
+    height: 10px;
+    float: right;
+    padding-right: 200px;
+}
+
+.make_50px_width{
+    width: 40px;
+    padding-right: 10px;
+    display: inline-block;
+}
+
+.make_180px_width{
+    width: 170px;
+    padding-right: 10px;
+    display: inline-block;
 }
 
 @media screen and (min-width: 300px) and (max-width: 720px) {
