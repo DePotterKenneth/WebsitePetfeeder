@@ -8,6 +8,9 @@ instance_db = DbConnection("petfeeder_db")
 
 app = Flask(__name__)
 
+def getDbInfo(sql1, sql2, sql3):
+    pass
+
 
 @app.route('/')
 def live():
@@ -21,14 +24,65 @@ def live():
         drink_time_list.append(record['timestamp'])
         drink_value_list.append(record['millilitres_left'])
 
-    print(drink_value_list)
-    print(drink_time_list)
 
-    return render_template('index.html', drink_time_list=drink_time_list, drink_value_list=drink_value_list)
+    sql2 = (' SELECT grams_left, timestamp FROM petfeeder_db.tblfoodlog where date(timestamp) = current_date();')
+    result2 = instance_db.query(sql2, dictionary=True)
+    food_time_list = []
+    food_value_list = []
 
-@app.route('/history')
+    for item in range(0, len(result2)):
+        record = result2[item]
+        food_time_list.append(record['timestamp'])
+        food_value_list.append(record['grams_left'])
+
+
+    sql3 = ('SELECT percentage_left, timestamp FROM petfeeder_db.tblprovision where date(timestamp) = current_date();')
+    result3 = instance_db.query(sql3, dictionary=True)
+    provision_time_list = []
+    provision_value_list = []
+
+    for item in range(0, len(result3)):
+        record = result3[item]
+        provision_time_list.append(record['timestamp'])
+        provision_value_list.append(record['percentage_left'])
+
+    return render_template('index.html', drink_time_list=drink_time_list, drink_value_list=drink_value_list ,food_time_list=food_time_list, food_value_list=food_value_list, provision_time_list=provision_time_list, provision_value_list=provision_value_list)
+
+@app.route('/history/')
 def history():
-    return render_template('history.html')
+    sql = ('SELECT millilitres_left, timestamp FROM petfeeder_db.tbldrinklog where date(timestamp) = current_date();')
+    result = instance_db.query(sql, dictionary=True)
+    drink_time_list = []
+    drink_value_list = []
+
+    for item in range(0, len(result)):
+        record = result[item]
+        drink_time_list.append(record['timestamp'])
+        drink_value_list.append(record['millilitres_left'])
+
+
+    sql2 = (' SELECT grams_left, timestamp FROM petfeeder_db.tblfoodlog where date(timestamp) = current_date();')
+    result2 = instance_db.query(sql2, dictionary=True)
+    food_time_list = []
+    food_value_list = []
+
+    for item in range(0, len(result2)):
+        record = result2[item]
+        food_time_list.append(record['timestamp'])
+        food_value_list.append(record['grams_left'])
+
+
+    sql3 = ('SELECT percentage_left, timestamp FROM petfeeder_db.tblprovision where date(timestamp) = current_date();')
+    result3 = instance_db.query(sql3, dictionary=True)
+    provision_time_list = []
+    provision_value_list = []
+
+    for item in range(0, len(result3)):
+        record = result3[item]
+        provision_time_list.append(record['timestamp'])
+        provision_value_list.append(record['percentage_left'])
+
+    return render_template('history.html', drink_time_list=drink_time_list, drink_value_list=drink_value_list ,food_time_list=food_time_list, food_value_list=food_value_list, provision_time_list=provision_time_list, provision_value_list=provision_value_list)
 
 @app.route('/settings', methods=['GET','POST'])
 def settings():

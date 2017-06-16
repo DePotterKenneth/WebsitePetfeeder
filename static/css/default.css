@@ -88,10 +88,21 @@ footer ul li a{
 }
 
 .small_chart{
-    width: 45%;
+    width: 41%;
     height: auto;
     padding: 2%;
     border: 1px solid black;
+    float: left;
+    margin: 2%;
+}
+
+.normal_chart{
+    width: 90%;
+    height: auto;
+    padding: 2%;
+    border: 1px solid black;
+    float: left;
+    margin: 2%;
 }
 
 .content{
@@ -150,6 +161,12 @@ footer ul li a{
         margin: auto;
         text-align: center;
     }
+
+    .small_chart{
+    width: 90%;
+    }
+
+
 }
 
 
@@ -160,6 +177,10 @@ footer ul li a{
 
     header{
         text-align: center;
+    }
+
+    .small_chart{
+        width: 90%;
     }
 }
 /*
@@ -213,5 +234,9 @@ footer ul li a{
 
     h2{
         font-size: x-large;
+    }
+
+    .small_chart{
+    width: 90%;
     }
 }

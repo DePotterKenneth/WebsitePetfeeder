@@ -39,3 +39,4 @@ function makeChart(id_canvas, time_list, value_list, color) {
         }
     });
 }
+
