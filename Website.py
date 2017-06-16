@@ -111,29 +111,21 @@ def history_post():
         abort(400)
 
 
-@app.route('/settings', methods=['GET','POST'])
-def settings():
-    instantie_db = DbConnection('petfeeder_db')
+@app.route('/settings', methods=['GET'])
+def settings_get():
+    try:
+        instance_db = DbConnection('petfeeder_db')
+        sql = ('select led_alarm_enabeld, sound_alarm_enabled, email_alarm_enabled, sms_alarm_enabled, food_alarm_enabled, drink_alarm_enabled, provision_alarm_enabled, food_alarm_threshold, drink_alarm_threshold, provision_alarm_threshold, alarm_interval_hours, email, phone_number from tblsettings;')
+        result = instance_db.query(sql, dictionary=True)
+        result = result[0]
+        print(result)
+        return render_template('settings.html', result=result)
+    except:
+        abort(400)
 
-    if request.method == 'POST':
-        try:
-            # sql = ('update tblsettings set led_alarm_enabeld = %(led_alarm_enabeld)s where settings_id = 1;')
-            #
-            # params = {
-            #     'led_alarm_enabeld': int(request.form['led_alarm_enabeld'])
-            # }
-            #
-            # instantie_db.execute(sql, params)
-
-            vae = request.form['led_alarm_enabeld']
-
-            print(vae)
-
-            return render_template('settings.html')
-        except:
-            abort(400)
-    else:
-        return render_template('settings.html')
+@app.route('/settings', methods=['POST'])
+def settings_post():
+    return render_template('settings.html')
 
 @app.route('/about')
 def about():
