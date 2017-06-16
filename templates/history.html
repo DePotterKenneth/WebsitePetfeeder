@@ -10,11 +10,13 @@
 {% endblock %}
 
 {% block scripts %}
-    <label for="from_date">From date</label>
-    <input type="date" id="from_date" name="from_date"><br>
-    <label for="until_date">Until date</label>
-    <input type="date" id="until_date" name="until_date"><br>
-    <button type="button" id="view" value="view"></button>
+    <form id="history" method="post">
+        <label for="from_date">From date</label>
+        <input type="date" id="from_date" name="from_date" value="{{ from_date }}"><br>
+        <label for="until_date">Until date</label>
+        <input type="date" id="until_date" name="until_date" value="{{ until_date }}"><br>
+        <input type="submit" id="submit"><br>
+    </form>
 
 
     <div class="normal_chart">
@@ -28,6 +30,10 @@
     <div class="normal_chart">
         <canvas id="provision_chart"></canvas>
     </div>
+
+    <br>
+    <br>
+    <br>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
 
