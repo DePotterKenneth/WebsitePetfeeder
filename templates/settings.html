@@ -11,16 +11,19 @@
     <form method="post" title="settings" name="alarm_settings">
         <h3>Notifications</h3>
         <label class="make_180px_width" for="led_alarm_enabeld">led alarm enabeld</label>
-        <input  type="checkbox" name="led_alarm_enabeld" value="0" id="led_alarm_enabeld" title="led alarm enabeld" {% if 1 == result['led_alarm_enabeld'] %}checked=""{% endif %}>
+        <input  type="checkbox" name="led_alarm_enabeld" value="1" id="led_alarm_enabeld" title="led alarm enabeld" {% if 1 == result['led_alarm_enabeld'] %}checked=""{% endif %}>
         <br>
         <label class="make_180px_width" for="sound_alarm_enabeld">sound alarm enabeld</label>
         <input type="checkbox" name="sound_alarm_enabled" id="sound_alarm_enabled" value="1" title="sound alarm enabled" {% if 1 == result['sound_alarm_enabled'] %}checked=""{% endif %}>
         <br>
-        <label class="make_180px_width" for="email_alarm_enabeld">email alarm enabeld</label>
+        <label class="make_180px_width" for="email_alarm_enabled">email alarm enabeld</label>
         <input type="checkbox" name="email_alarm_enabled" value="1" title="email alarm enabled"  {% if 1 == result['email_alarm_enabled'] %}checked=""{% endif %}>
         <br>
         <label class="make_180px_width" for="sms_alarm_enabeld">sms alarm enabeld</label>
         <input type="checkbox" name="sms_alarm_enabled" value="1" title= "sms alarm enabled"  {% if 1 == result['sms_alarm_enabled'] %}checked=""{% endif %}><br>
+        <br>
+        <label class="make_180px_width" for="alarm_interval_hours">alarm interval hours</label>
+        <input class="make_50px_width" type="number" name="alarm_interval_hours" min="1" max="100" value="{{ result['alarm_interval_hours'] }}" title= "alarm interval hours"><br>
         <br>
 
         <h3>Food alarms</h3>
@@ -50,25 +53,34 @@
         <label class="make_180px_width" for="phone_number">phone number:</label>
         <input type="tel" name="phone_number" title="phone number"  value="{{ result['phone_number'] }}" ><br>
 
-        <input type="submit" value="Submit alarm settings"><br>
+        <input type="text" value="alarm" title="honey" name="honey" hidden="hidden"><br>
 
+        <input type="submit" value="Submit alarm settings" id="submit_alarm" title="" name="alarm">
+        <br>
         <br>
         <br>
     </form>
 
-    <h2>Pasword settings</h2>
-    <form method="post" title="pasword_change" name="pasword">
+    <h2 hidden="hidden">Pasword settings</h2>
+    <form method="post" title="pasword_change" name="pasword" hidden="hidden">
         <h3>Change pasword</h3>
         <label class="make_180px_width" for="old_password"> old password</label><input type="password" title="old pasword"><br>
         <label class="make_180px_width" for="new_password"> new password</label><input type="password" title="new pasword"><br>
 
-        <input type="submit" value="Submit">
+        <input type="text" value="pasword" title="honey" name="honey" hidden="hidden"><br>
+
+        <input type="submit" value="Submit pasword change" id="submit">
+        <br>
+        <br>
+        <br>
     </form>
 
-    <h2>Feeding settings</h2>
-    <form method="post" title="feeding_settings">
+    <h2 hidden="hidden">Feeding settings</h2>
+    <form method="post" title="feeding_settings" hidden="hidden">
         <h3>Change pasword</h3>
-        <input type="submit" value="Submit">
+
+        <input type="text" value="feeding_settings" title="honey" name="honey" hidden="hidden"><br>
+        <input type="submit" value="Submit feeding settings" id="submit">
     </form>
 
 {% endblock %}
