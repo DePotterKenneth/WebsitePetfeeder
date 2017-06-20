@@ -75,14 +75,31 @@
         <br>
     </form>
 
-    <h2 hidden="hidden">Feeding settings</h2>
-    <form method="post" title="feeding_settings" hidden="hidden">
-        <h3>Change pasword</h3>
+    <h2>Feeding settings</h2>
 
-        <input type="text" value="feeding_settings" title="honey" name="honey" hidden="hidden"><br>
-        <input type="submit" value="Submit feeding settings" id="submit">
+    <form method="post" title="feeding_settings_add">
+    <h3>Add a setting</h3>
+        <label class="make_180px_width" for="time">time:</label>
+        <input type="time" title="time" name="time">
+        <br>
+        <label class="make_180px_width" for="amount_to_be_dispensed">amount to be dispensed:</label>
+        <input class="make_50px_width" type="number" min="1" max="200" title="amount_to_be_dispensed" name="amount_to_be_dispensed">
+        <br>
+        <label class="make_180px_width">cumulative:</label>
+        <input type="checkbox" title="cumulative" name="cumulative" value="1">
+
+        <input type="text" value="feeding_settings_add" title="honey" name="honey" hidden="hidden"><br>
+
+        <input type="submit" value="Submit new setting" id="submit" name="feeding_settings_add">
     </form>
 
+    <h3>Remove setting</h3>
+    <h2>Feeding settings</h2>
+    <form method="post" title="feeding_settings_remove" hidden="hidden">
+        <h3> Give food settings</h3>
+        <input type="text" value="feeding_settings_remove" title="honey" name="honey" hidden="hidden"><br>
+        <input type="submit" value="Remove selected setting" id="submit">
+    </form>
 {% endblock %}
 
 {#{% block scripts %}#}

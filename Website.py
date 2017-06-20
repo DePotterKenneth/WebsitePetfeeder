@@ -124,42 +124,80 @@ def settings_get():
 
 @app.route('/settings', methods=['POST'])
 def settings_post():
-    form_sent = (request.form['honey'])
+    try:
+        form_sent = (request.form['honey'])
 
-    if form_sent == 'alarm':
-        sql = ('update tblsettings set led_alarm_enabeld=%(led_alarm_enabeld)s , sound_alarm_enabled= %(sound_alarm_enabled)s ,email_alarm_enabled= %(email_alarm_enabled)s , sms_alarm_enabled= %(sms_alarm_enabled)s , food_alarm_enabled= %(food_alarm_enabled)s , drink_alarm_enabled= %(drink_alarm_enabled)s , provision_alarm_enabled= %(provision_alarm_enabled)s , food_alarm_threshold= %(food_alarm_threshold)s , drink_alarm_threshold= %(drink_alarm_threshold)s , provision_alarm_threshold= %(provision_alarm_threshold)s , alarm_interval_hours= %(alarm_interval_hours)s , email= %(email)s , phone_number= %(phone_number)s where settings_id = 1;')
+        if form_sent == 'alarm':
+            sql = (
+            'update tblsettings set led_alarm_enabeld=%(led_alarm_enabeld)s , sound_alarm_enabled= %(sound_alarm_enabled)s ,email_alarm_enabled= %(email_alarm_enabled)s , sms_alarm_enabled= %(sms_alarm_enabled)s , food_alarm_enabled= %(food_alarm_enabled)s , drink_alarm_enabled= %(drink_alarm_enabled)s , provision_alarm_enabled= %(provision_alarm_enabled)s , food_alarm_threshold= %(food_alarm_threshold)s , drink_alarm_threshold= %(drink_alarm_threshold)s , provision_alarm_threshold= %(provision_alarm_threshold)s , alarm_interval_hours= %(alarm_interval_hours)s , email= %(email)s , phone_number= %(phone_number)s where settings_id = 1;')
 
-        params = {
-            'led_alarm_enabeld': 1,
-            'sound_alarm_enabled': 0,
-            'sms_alarm_enabled': 0,
-            'email_alarm_enabled':0,
-            'food_alarm_enabled': 0,
-            'drink_alarm_enabled': 0,
-            'provision_alarm_enabled': 0,
-            'alarm_interval_hours': request.form['alarm_interval_hours'],
-            'food_alarm_threshold': request.form['food_alarm_threshold'],
-            'drink_alarm_threshold': request.form['drink_alarm_threshold'],
-            'provision_alarm_threshold': request.form['provision_alarm_threshold'],
-            'email': request.form['email'],
-            'phone_number': request.form['phone_number']
-        }
+            params = {
+                'led_alarm_enabeld': 0,
+                'sound_alarm_enabled': 0,
+                'sms_alarm_enabled': 0,
+                'email_alarm_enabled': 0,
+                'food_alarm_enabled': 0,
+                'drink_alarm_enabled': 0,
+                'provision_alarm_enabled': 0,
+                'alarm_interval_hours': request.form['alarm_interval_hours'],
+                'food_alarm_threshold': request.form['food_alarm_threshold'],
+                'drink_alarm_threshold': request.form['drink_alarm_threshold'],
+                'provision_alarm_threshold': request.form['provision_alarm_threshold'],
+                'email': request.form['email'],
+                'phone_number': request.form['phone_number']
+            }
 
-        checkbox_list = ['led_alarm_enabeld', 'sound_alarm_enabled', 'email_alarm_enabled', 'sms_alarm_enabled', 'food_alarm_enabled', 'drink_alarm_enabled', 'provision_alarm_enabled']
+            checkbox_list = ['led_alarm_enabeld', 'sound_alarm_enabled', 'email_alarm_enabled', 'sms_alarm_enabled',
+                             'food_alarm_enabled', 'drink_alarm_enabled', 'provision_alarm_enabled']
 
-        for getal in range(0,len(checkbox_list)):
-            try:
-                if request.form[checkbox_list[getal]] == '1':
-                    params[checkbox_list[getal]] = 1
-            except:
-                pass
+            for getal in range(0, len(checkbox_list)):
+                try:
+                    if request.form[checkbox_list[getal]] == '1':
+                        params[checkbox_list[getal]] = 1
+                except:
+                    pass
 
-        instance_db.execute(sql, params)
+            instance_db.execute(sql, params)
 
-        return render_template('index.html')
-    else:
-        return render_template('history.html')
+            return render_template('succes_settings.html')
+        else:
 
+            if form_sent == "feeding_settings_add":
+                sql = (
+                'insert into petfeeder_db.tblfoodsettings (amount_to_be_dispensed, time, cumulative) VALUES ( %(amount_to_be_dispensed)s, %(time)s, %(cumulative)s);')
+
+                time_in_form = request.form['time']
+                time_change = "2017-01-01 " + time_in_form + ":0000"
+                print(time_change)
+
+                params = {
+                    'time': time_change,
+                    'amount_to_be_dispensed': request.form['amount_to_be_dispensed'],
+                    'cumulative': 0
+                }
+
+                try:
+                    if request.form['cumulative'] == '1':
+                        params['cumulative'] = 1
+                except Exception as e:
+                    print(e)
+
+                instance_db.execute(sql, params)
+
+                return render_template("succes_settings.html")
+            else:
+                if form_sent == "feeding_settings_remove":
+                    return render_template("succes_settings.html")
+                else:
+                    return abort(404)
+
+    except Exception as e:
+        print(e)
+
+
+# @app.route('/info')
+# def info():
+#     return render_template('info.html')
 
 @app.route('/about')
 def about():
